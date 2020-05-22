@@ -29,7 +29,7 @@ public class LogitechController extends ControllerModel {
     public static final AxisDef LEFT_TRIGGER_HELD = new AxisDef(0, 2);
     public static final AxisDef RIGHT_TRIGGER_HELD = new AxisDef(0, 3);
 
-    public static final AxisDef RIGHT_STICK_x = new AxisDef(0, 4);
+    public static final AxisDef RIGHT_STICK_x = new AxisDef(0, 4); 
     public static final AxisDef RIGHT_STICK_Y = new AxisDef(0, 5);
     // #endregion
 }
