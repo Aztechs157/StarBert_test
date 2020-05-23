@@ -11,16 +11,16 @@ public class ControllerSet {
     // Map of joystick ids to Joysick objects
     private final HashMap<Integer, Joystick> joysticks = new HashMap<>();
 
-    private final ControllerModel[] controllers;
-    private int activeController = 0; // The first controller in the list gets active by default
+    private final ControllerModel[] models;
+    private int activeModelIndex = 0; // The first controller in the list gets active by default
 
-    public ControllerSet(final ControllerModel... controllers) {
+    public ControllerSet(final ControllerModel... models) throws IllegalArgumentException {
         // It doesn't make sense to make a set with no controller
         // The rest of the code makes use of this assumsion
-        if (controllers.length < 1) {
+        if (models.length < 1) {
             throw new IllegalArgumentException("ControllerSet must have at least one controller!");
         }
-        this.controllers = controllers;
+        this.models = models;
     }
 
     /**
@@ -43,7 +43,7 @@ public class ControllerSet {
      * @return The state of the button
      */
     public boolean getRawButton(final ButtonDef def) {
-        return controllers[activeController].getButton(this::getJoystick, def);
+        return models[activeModelIndex].getRawButton(this::getJoystick, def);
     }
 
     /**
@@ -53,7 +53,7 @@ public class ControllerSet {
      * @return The value of the axis
      */
     public double getRawAxis(final AxisDef def) {
-        return controllers[activeController].getAxis(this::getJoystick, def);
+        return models[activeModelIndex].getRawAxis(this::getJoystick, def);
     }
 
     /**
@@ -63,7 +63,7 @@ public class ControllerSet {
      * @return A wpilib Button object that dynamicly responds to the current active
      */
     public Button useButton(final ButtonDef... defs) {
-        return new Button(() -> getRawButton(defs[activeController]));
+        return new Button(() -> getRawButton(defs[activeModelIndex]));
     }
 
     /**
@@ -73,7 +73,7 @@ public class ControllerSet {
      * @return The value of the axis of the currently active controller
      */
     public double useAxis(final AxisDef... defs) {
-        return getRawAxis(defs[activeController]);
+        return getRawAxis(defs[activeModelIndex]);
     }
 
     /**
@@ -82,11 +82,11 @@ public class ControllerSet {
      * @param newActive The index that the new active controller was passed into
      *                  ControllerSet's constructor
      */
-    public void setActive(final int newActive) {
-        activeController = newActive;
+    public void setActiveModelIndex(final int newActive) {
+        activeModelIndex = newActive;
     }
 
-    public int getActive() {
-        return activeController;
+    public int getActiveModelIndex() {
+        return activeModelIndex;
     }
 }

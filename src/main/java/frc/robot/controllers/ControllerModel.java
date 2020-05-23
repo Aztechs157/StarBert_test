@@ -37,11 +37,11 @@ public class ControllerModel {
         this.joystickIds = joystickIds;
     }
 
-    public boolean getButton(final IntFunction<Joystick> getJoystick, final ButtonDef def) {
+    public boolean getRawButton(final IntFunction<Joystick> getJoystick, final ButtonDef def) {
         return getJoystick.apply(joystickIds[def.joystickId]).getRawButton(def.buttonId);
     }
 
-    public double getAxis(final IntFunction<Joystick> getJoystick, final AxisDef def) {
+    public double getRawAxis(final IntFunction<Joystick> getJoystick, final AxisDef def) {
         return getJoystick.apply(joystickIds[def.joystickId]).getRawAxis(def.axisId);
     }
 }

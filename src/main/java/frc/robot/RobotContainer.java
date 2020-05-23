@@ -45,13 +45,13 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
 
-        driveSet.useButton(LogitechController.A, LogitechController.B).whenPressed(() -> System.out.println("Presed"));
+        driveSet.useButton(LogitechController.A, LogitechController.B).whenPressed(() -> System.out.println("Pressed"));
 
         driveSet.useButton(LogitechController.START, LogitechController.START).whenPressed(() -> {
-            if (driveSet.getActive() == 0) {
-                driveSet.setActive(1);
+            if (driveSet.getActiveModelIndex() == 0) {
+                driveSet.setActiveModelIndex(1);
             } else {
-                driveSet.setActive(0);
+                driveSet.setActiveModelIndex(0);
             }
         });
     }
