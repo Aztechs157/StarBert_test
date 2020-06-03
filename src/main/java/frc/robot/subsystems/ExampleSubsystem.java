@@ -8,6 +8,8 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
@@ -23,15 +25,23 @@ public class ExampleSubsystem extends SubsystemBase {
      */
     public final DigitalOutput out0;
     public final DigitalInput in1;
-    public final Encoder enc23;
-    public final TalonSRX motor1;
+    public final CANSparkMax motor1;
 
     public ExampleSubsystem(final ControllerSet controller) {
-        this.motor1 = new TalonSRX(0);
+        this.motor1 = new CANSparkMax(0, MotorType.kBrushless);
         this.out0 = new DigitalOutput(0);
         this.in1 = new DigitalInput(1);
-        this.enc23 = new Encoder(2, 3, false, EncodingType.k4X);
         setDefaultCommand(new ExampleCommand(this, controller));
+    }
+
+    /**
+     * sets the speed of a motor to a desired value between 1 and -1
+     *
+     * @param speed the value between 1 and -1 to set the motor to. if it is out of
+     *              that range, it will bound the value to that range
+     */
+    public void run(double speed) {
+        motor1.set(speed);
     }
 
     @Override

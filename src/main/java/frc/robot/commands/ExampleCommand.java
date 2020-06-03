@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import frc.robot.controllers.ControllerSet;
+import frc.robot.controllers.LogitechController;
 import frc.robot.controllers.ControllerModel.AxisDef;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -41,13 +42,7 @@ public class ExampleCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-
-        System.out.print("0: " + Math.round(controller.getRawAxis(new AxisDef(0, 0)) * 100) + "  ");
-        System.out.print("1: " + Math.round(controller.getRawAxis(new AxisDef(0, 1)) * 100) + "  ");
-        System.out.print("2: " + Math.round(controller.getRawAxis(new AxisDef(0, 2)) * 100) + "  ");
-        System.out.print("3: " + Math.round(controller.getRawAxis(new AxisDef(0, 3)) * 100) + "  ");
-        System.out.print("4: " + Math.round(controller.getRawAxis(new AxisDef(0, 4)) * 100) + "  ");
-        System.out.println("5: " + Math.round(controller.getRawAxis(new AxisDef(0, 5)) * 100));
+        subsystem.run(controller.useAxis(new AxisDef(0, 0)));
     }
 
     // Called once the command ends or is interrupted.
